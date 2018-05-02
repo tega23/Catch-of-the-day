@@ -10,6 +10,5 @@ class Inventory extends React.Component{
             </div>
         )
     }
-
 }
 export default Inventory;
