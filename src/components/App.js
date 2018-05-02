@@ -13,7 +13,8 @@ class App extends React.Component{
         this.loadSamples = this.loadSamples.bind(this);
         this.addToOrder = this.addToOrder.bind(this);
         this.updateFish = this.updateFish.bind(this);
-        this.removeFish = this.removeFish.bind(fish);
+        this.removeFish = this.removeFish.bind(this);
+        this.removeFromOrder = this.removeFromOrder.bind(this);
         this.state = {
             fishes:{},
             order:{},
@@ -63,6 +64,11 @@ class App extends React.Component{
         order[key] = order[key] + 1 || 1;
         this.setState({order})
     }
+    removeFromOrder(key){
+        const order = {...this.state.order}
+        delete order[key];
+        this.setState({order})
+    }
     render(){
         return (
             <div className="catch-of-the-day">
@@ -72,12 +78,17 @@ class App extends React.Component{
                         {Object.keys(this.state.fishes).map(key => <Fish key={key} details={this.state.fishes[key]} index={key} addToOrder={this.addToOrder}/> )}
                     </ul>
                 </div>
-                <Order fishes={this.state.fishes} order={this.state.order} />
+                <Order 
+                    fishes={this.state.fishes} 
+                    order={this.state.order} 
+                    removeFromOrder = {this.removeFromOrder}
+                />
                 <Inventory 
                     addFish={this.addFish} 
                     fishes={this.state.fishes} 
                     loadSamples = {this.loadSamples}
                     updateFish={this.updateFish}
+                    removeFish = {this.removeFish}
                 />
             </div>
         )
