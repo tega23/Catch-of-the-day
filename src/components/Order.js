@@ -15,15 +15,27 @@ class Order extends React.Component{
         }
         return (
             <li key ={key}>
-                <span>{count}lbs {fish.name} {removeButton}</span>
+                <span>
+                    <CSSTransitionGroup 
+                        component="span"
+                        className="count"
+                        transitionName="count"
+                        transitionEnterTimeout={250}
+                        transitionLeaveTimeout={250}
+                    >
+                        <span key={count}>
+                            {count}
+                        </span>
+                    </CSSTransitionGroup>
+                    lbs 
+                    {fish.name} 
+                    {removeButton}
+                </span>
                 <span className="price">{formatPrice(count * fish.price)}</span>
 
             </li>
         )
     }
-
-
-
     render(){
         const orderIds = Object.keys(this.props.order)
         const total = orderIds.reduce((prevTotal, key) =>{
@@ -42,8 +54,8 @@ class Order extends React.Component{
                     className="order" 
                     component="ul" 
                     transitionName="order"
-                    transitionEnterTimeout={1000}
-                    transitionLeaveTimeout={1000}
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
                 >
                     {orderIds.map(this.renderOrder)}
                     <li className="total">

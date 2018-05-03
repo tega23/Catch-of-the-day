@@ -8,7 +8,6 @@ import App from './components/App'
 import NotFound from './components/NotFound'
 
 
-
 const Root = () => {
     return (
         <BrowserRouter>
